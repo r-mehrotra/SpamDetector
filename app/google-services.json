@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "903984311930",
+    "project_id": "anti-smisher",
+    "storage_bucket": "anti-smisher.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903984311930:android:be9b9973e53b52317915c3",
+        "android_client_info": {
+          "package_name": "com.microsoft.spamdetector"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903984311930-msqv7r6dk7q06n4vc5neli41b6o8ec5r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxRiO5D2b0EQjG5u6Fm0LJ02HpQu6JLKE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903984311930-msqv7r6dk7q06n4vc5neli41b6o8ec5r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
