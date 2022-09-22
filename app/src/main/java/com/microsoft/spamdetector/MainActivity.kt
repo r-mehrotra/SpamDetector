@@ -141,24 +141,6 @@ class MainActivity : AppCompatActivity() {
         return tokenizedMessage.toIntArray()
     }
 
-    // Pad the given sequence to maxlen with zeros.
-    fun padSequence(sequence: IntArray): IntArray {
-        val maxlen = this.maxlen
-        if (sequence.size > maxlen) {
-            return sequence.sliceArray(0..maxlen)
-        } else if (sequence.size < maxlen) {
-            val array = ArrayList<Int>()
-            array.addAll(sequence.asList())
-            for (i in array.size until maxlen) {
-                array.add(0)
-            }
-            return array.toIntArray()
-        } else {
-            return sequence
-        }
-    }
-
-
     fun classifySequence(sequence: IntArray): FloatArray {
         val inputs: Array<FloatArray> = arrayOf(sequence.map { it.toFloat() }.toFloatArray())
         val outputs: Array<FloatArray> = arrayOf(floatArrayOf(0.0f, 0.0f))
@@ -173,16 +155,14 @@ class MainActivity : AppCompatActivity() {
                 withContext(Dispatchers.IO) {
                     val dictData = tempFile!!.readText()
                     val vocab = loadVocab(dictData)
-
                     val uriSms = Uri.parse("content://sms")
                     val cursor = contentResolver.query(uriSms, null, null, null, null)!!
                     cursor.moveToFirst()
                     val itemCount = cursor.count
                     for (i in 0 until itemCount) {
                         val message = cursor.getString(cursor.getColumnIndexOrThrow("body"))
-                        val tokenizedMessage = tokenize(message.lowercase().trim(), vocab)
-                        val paddedMessage = padSequence(tokenizedMessage)
-                        val results = classifySequence(paddedMessage)
+                        val filteredMessage = _viewModel.filterInput(message.lowercase().trim(), vocab)
+                        val results = classifySequence(filteredMessage)
                         val item = MessageUIModel(
                             id = cursor.getString(cursor.getColumnIndexOrThrow("_id")),
                             title = cursor.getString(cursor.getColumnIndexOrThrow("address")),

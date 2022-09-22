@@ -60,6 +60,5 @@
             app:layout_constraintTop_toBottomOf="@id/messageDescription"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
