@@ -16,11 +16,49 @@
         tools:context=".MainActivity">
 
 
+        <TextView
+            android:id="@+id/totalMessageCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.totalMessageCount}"
+            android:visibility="@{viewModel.messageListVisibility}"
+            android:textColor="#000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/hamMessageCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.hamMessageCount}"
+            android:textColor="#00FF00"
+            android:visibility="@{viewModel.messageListVisibility}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/totalMessageCount" />
+
+        <TextView
+            android:id="@+id/spamCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.spamCount}"
+            android:visibility="@{viewModel.messageListVisibility}"
+            android:textColor="#FF0000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hamMessageCount" />
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/messageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="@{viewModel.messageListVisibility}" />
+            android:layout_height="0dp"
+            android:visibility="@{viewModel.messageListVisibility}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spamCount" />
 
 
         <Button

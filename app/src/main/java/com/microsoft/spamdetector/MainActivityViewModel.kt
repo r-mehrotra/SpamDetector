@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.pm.PackageManager
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.AndroidViewModel
 
@@ -23,6 +24,11 @@ class MainActivityViewModel(app: Application) : AndroidViewModel(app) {
             false -> View.VISIBLE
         }
     )
+
+    val hamMessageCount = ObservableField<String>("")
+    val totalMessageCount = ObservableField<String>("")
+    val spamCount = ObservableField<String>("")
+
 
     val permissionList = listOf(Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS)
 
@@ -88,12 +94,35 @@ class MainActivityViewModel(app: Application) : AndroidViewModel(app) {
         } else if (sequence.size < maxlen) {
             val array = ArrayList<Int>()
             array.addAll(sequence.asList())
-            for (i in array.size until maxlen) {
-                array.add(0)
+            val size = array.size
+            for (i in size until maxlen) {
+                array.add(0, 0)
             }
             return array.toIntArray()
         } else {
             return sequence
         }
+    }
+
+    fun updateMessageCount(messageCOunt: Int) {
+        totalMessageCount.set(
+            getApplication<Application>().getString(
+                R.string.total_count,
+                messageCOunt.toString()
+            )
+        )
+    }
+
+    fun updateSpamCount(spam: Int) {
+        spamCount.set(getApplication<Application>().getString(R.string.spam_count, spam.toString()))
+    }
+
+    fun updateNormalMessageCounrt(normal: Int) {
+        hamMessageCount.set(
+            getApplication<Application>().getString(
+                R.string.normal_count,
+                normal.toString()
+            )
+        )
     }
 }

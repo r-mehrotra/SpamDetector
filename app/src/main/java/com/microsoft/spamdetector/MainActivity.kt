@@ -143,7 +143,7 @@ class MainActivity : AppCompatActivity() {
 
     fun classifySequence(sequence: IntArray): FloatArray {
         val inputs: Array<FloatArray> = arrayOf(sequence.map { it.toFloat() }.toFloatArray())
-        val outputs: Array<FloatArray> = arrayOf(floatArrayOf(0.0f, 0.0f))
+        val outputs: Array<FloatArray> = arrayOf(floatArrayOf(0.0f))
         interpreter!!.run(inputs, outputs)
         return outputs[0]
     }
@@ -152,6 +152,9 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val list = ArrayList<MessageUIModel>()
+                var hamCount = 0
+                var totalCount = 0
+                var spamCount = 0
                 withContext(Dispatchers.IO) {
                     val dictData = tempFile!!.readText()
                     val vocab = loadVocab(dictData)
@@ -161,7 +164,8 @@ class MainActivity : AppCompatActivity() {
                     val itemCount = cursor.count
                     for (i in 0 until itemCount) {
                         val message = cursor.getString(cursor.getColumnIndexOrThrow("body"))
-                        val filteredMessage = _viewModel.filterInput(message.lowercase().trim(), vocab)
+                        val filteredMessage =
+                            _viewModel.filterInput(message.lowercase().trim(), vocab)
                         val results = classifySequence(filteredMessage)
                         val item = MessageUIModel(
                             id = cursor.getString(cursor.getColumnIndexOrThrow("_id")),
@@ -173,12 +177,21 @@ class MainActivity : AppCompatActivity() {
                             folderName = cursor.getString(cursor.getColumnIndexOrThrow("type")),
                             isSmishMessage = results[0] >= 0.8f,
                         )
+                        if (item.isSmishMessage) {
+                            spamCount++
+                        } else {
+                            hamCount++
+                        }
                         list.add(item)
-                        Log.d("MainActivity", "${results[0]} ${results[1]} $item")
+                        Log.d("MainActivity", "${results[0]} $item")
                         cursor.moveToNext()
                     }
                     cursor.close()
+                    totalCount = list.size
                 }
+                _viewModel.updateMessageCount(totalCount)
+                _viewModel.updateSpamCount(spamCount)
+                _viewModel.updateNormalMessageCounrt(hamCount)
                 _adapter.updateList(list)
             } catch (e: Exception) {
                 _adapter.updateList(ArrayList())

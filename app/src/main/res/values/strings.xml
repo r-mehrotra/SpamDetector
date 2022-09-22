@@ -11,4 +11,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="grant_desired_permissions">Grant desired permissions</string>
     <string name="smish_message">This is a Scam message</string>
+    <string name="spam_count">Spam %1$s  </string>
+    <string name="normal_count">Non-spam message count %1$s  </string>
+    <string name="total_count">Total message count %1$s  </string>
 </resources>
