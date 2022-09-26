@@ -1,12 +1,14 @@
 package com.microsoft.spamdetector
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "messages")
 data class MessageUIModel(
-    val id: String,
-    val title: String,
-    val message: String,
-    val sender: String,
-    val isSmishMessage: Boolean,
-    val time: String,
-    val folderName: String,
-    val readState: String,
+    @PrimaryKey
+    @ColumnInfo(name = "id") val id: String,
+    @ColumnInfo(name = "message") val message: String,
+    @ColumnInfo(name = "sender") val sender: String,
+    @ColumnInfo(name = "isSmishMessage") val isSmishMessage: Boolean
 )

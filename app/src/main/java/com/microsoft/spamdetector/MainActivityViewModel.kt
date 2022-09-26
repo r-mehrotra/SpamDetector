@@ -30,6 +30,9 @@ class MainActivityViewModel(app: Application) : AndroidViewModel(app) {
     val spamCount = ObservableField<String>("")
 
 
+    val spamMessages =
+        MessageDatabase.getInstance(getApplication()).getMessageDao().getSpamMessages()
+    val hamMessages = MessageDatabase.getInstance(getApplication()).getMessageDao().getHamMessages()
     val permissionList = listOf(Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS)
 
     fun arePermissionsGranted(): Boolean {

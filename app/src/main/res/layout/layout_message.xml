@@ -13,16 +13,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        >
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
         <TextView
             android:id="@+id/messageSender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#000000"
             android:text="@{modelData.sender}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,35 +32,14 @@
 
 
         <TextView
-            android:id="@+id/messageTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{modelData.title}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/messageSender" />
-
-
-        <TextView
             android:id="@+id/messageDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{modelData.message}"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/messageTitle"
-            />
-
-        <TextView
-            android:id="@+id/smishNotifier"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/smish_message"
-            android:visibility="@{modelData.smishMessage ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/messageDescription"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/messageSender" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SpamDetector/app/src/main/res/layout/activity_main.xml" value="0.30052083333333335" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SpamDetector/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SpamDetector/app/src/main/res/layout/ham_list_fragment.xml" value="0.261144883485309" />
         <entry key="..\:/Users/Administrator/AndroidStudioProjects/SpamDetector/app/src/main/res/layout/layout_message.xml" value="0.2563405797101449" />
+        <entry key="..\:/Users/Administrator/AndroidStudioProjects/SpamDetector/app/src/main/res/layout/spam_list_fragment.xml" value="0.552734375" />
       </map>
     </option>
   </component>

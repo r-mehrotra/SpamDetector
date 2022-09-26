@@ -1,5 +1,6 @@
 package com.microsoft.spamdetector
 
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -49,6 +50,13 @@ class MessageListAdapter(val list: ArrayList<MessageUIModel>) : RecyclerView.Ada
     class MessageVH(val binding: LayoutMessageBinding) : BaseVH(binding.root) {
         override fun bindData(position: Int, data: Any) {
             binding.modelData = data as MessageUIModel
+            binding.messageDescription.setTextColor(
+                if (data.isSmishMessage) {
+                    Color.parseColor("#FF0000")
+                } else {
+                    Color.parseColor("#00FF00")
+                }
+            )
         }
     }
 
